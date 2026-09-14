@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+source $BUILDROOT/usr/lib/os-release && echo $IMAGE_VERSION
