@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
-source $BUILDROOT/usr/lib/os-release && echo $IMAGE_VERSION
+# We must hardcode this location as the image does not exist when building yet
+source mkosi.base/usr/lib/os-release
+
+# Ouput the image version, store the os name in a file
+echo $ID > image.id
+echo $IMAGE_VERSION

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -oex
+
+# We want to make sure that the sysext is locked to the current IMAGE_VERSION and ID
+cat > ${BUILDROOT}/usr/lib/extension-release.d/extension-release.${IMAGE_ID}_${IMAGE_VERSION} <<EOF
+ID=$(cat image.id)
+VERSION_ID=${IMAGE_VERSION}
+EOF
