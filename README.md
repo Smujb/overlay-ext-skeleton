@@ -14,3 +14,5 @@ Currently, this project is hard tied to a versioning scheme where the first 8 di
 Ideally this would be fixed by pacman - we would rather not assume a versioning scheme or package manager.
 
 Additionally, package metadate for the base image is assumed to be in `/usr/lib/sysimage/lib/pacman`. This is hacky and [can hopefully be addressed by mkosi](https://github.com/systemd/mkosi/discussions/4459). Currently, package db info from the overlay does not persist onto the final image but again this would be fixed if mkosi implements custom db paths.
+
+Currently, some post-install scripts will fail to run if they are provided by a package already present on the image but required by one installed on the overlay. This issue is being tracked [here](https://github.com/systemd/mkosi/issues/4461).
