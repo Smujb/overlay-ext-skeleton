@@ -1,11 +1,24 @@
 #!/usr/bin/env bash
 
-# FIXME I hate stealing this from amethyris as it hard expects that the image this is being built from is using the exact same versioning scheme
-# But I have yet to come up with a better way of doing it so,
-
 # Grab our input data
 DATA=$(jq "." /dev/stdin)
 
-# Update the configuration data to reflect this
-echo $(jq --arg update_date "$(cat base_image.snapshot)" '.Snapshot=$update_date' <<< $DATA) > /dev/stdout
+# We cannot simply configure this in mkosi.conf as it will be overwritten by the below sourcing of os-release
+EXT_IMAGE_ID=overlay-ext
 
+# We must hardcode this location as the image does not exist when building yet
+source mkosi.base/usr/lib/os-release
+
+# Update the configuration data
+# We set:
+# Snapshot: so that we use the same Snapshot used to build the base image (os-release IMAGE_SNAPSHOT)
+# Environment: BASE_IMAGE_ID so we can lock the sysext to the image it was built for
+# ImageVersion: We generate this here instead of mkosi.version to simplify configuration (everything in one place)
+# ImageId: see above (EXT_IMAGE_ID)
+# Output: we cannot set this in mkosi.conf as the image name and ID are not yet known
+echo $(jq --arg update_date "${IMAGE_SNAPSHOT}" \
+        --arg image_id "${ID}" \
+        --arg image_version "${IMAGE_VERSION}" \
+        --arg ext_img_id "${EXT_IMAGE_ID}" \
+        --arg output_name "${EXT_IMAGE_ID}_${IMAGE_VERSION}" \
+        '.Snapshot=$update_date | .Environment={"BASE_IMAGE_ID" : $image_id} | .ImageVersion=$image_version | .ImageId=$ext_img_id | .Output=$output_name' <<< $DATA) > /dev/stdout
