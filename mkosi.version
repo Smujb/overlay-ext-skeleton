@@ -5,4 +5,5 @@ source mkosi.base/usr/lib/os-release
 
 # Ouput the image version, store the os name in a file
 echo $ID > base_image.id
+echo $IMAGE_SNAPSHOT > base_image.snapshot
 echo $IMAGE_VERSION

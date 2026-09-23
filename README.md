@@ -9,7 +9,7 @@ This mkosi profile is designed to be used for building overlays on systemd-sysup
 
 Obviously, if you cannot guarantee packages installed in this way will be syncronized with the base system with no layered updates then this tool will not work correctly or perhaps even at all.
 
-Currently, this project is hard tied to a versioning scheme where the first 8 digits of the version make up the date of the Arch Linux Archive build used to build this image (YYYYMMDD). Other ways of syncronizing package metadata are not supported, but hopefully will be in future.
+This project requires your `/usr/lib/os-release` file to contain the variable `IMAGE_SNAPSHOT=` set to the snapshot of the package db that the image was built against. This will be passed directly to mkosi, and the format may depend on the distribution used (Arch is `YYYY/MM/DD` for example).
 
 Ideally this would be fixed by pacman - we would rather not assume a versioning scheme or package manager.
 
