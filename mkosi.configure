@@ -21,4 +21,4 @@ echo $(jq --arg update_date "${IMAGE_SNAPSHOT}" \
         --arg image_version "${IMAGE_VERSION}" \
         --arg ext_img_id "${EXT_IMAGE_ID}" \
         --arg output_name "${EXT_IMAGE_ID}_${IMAGE_VERSION}" \
-        '.Snapshot=$update_date | .Environment={"BASE_IMAGE_ID" : $image_id} | .ImageVersion=$image_version | .ImageId=$ext_img_id | .Output=$output_name' <<< $DATA) > /dev/stdout
+        '.Snapshot=$update_date | .Environment={"BASE_IMAGE_ID" : $image_id, "OUTPUT_NAME" : $output_name} | .ImageVersion=$image_version | .ImageId=$ext_img_id | .Output=$output_name' <<< $DATA) > /dev/stdout
