@@ -3,8 +3,7 @@
 # Grab our input data
 DATA=$(jq "." /dev/stdin)
 
-# We cannot simply configure this in mkosi.conf as it will be overwritten by the below sourcing of os-release
-EXT_IMAGE_ID=overlay-ext
+OUTPUT_NAME=$(jq ".Output" /dev/stdin)
 
 # We must hardcode this location as the image does not exist when building yet
 source mkosi.base/usr/lib/os-release
@@ -18,7 +17,5 @@ source mkosi.base/usr/lib/os-release
 # Output: we cannot set this in mkosi.conf as the image name and ID are not yet known
 echo $(jq --arg update_date "${IMAGE_SNAPSHOT}" \
         --arg image_id "${ID}" \
-        --arg image_version "${IMAGE_VERSION}" \
-        --arg ext_img_id "${EXT_IMAGE_ID}" \
-        --arg output_name "${EXT_IMAGE_ID}_${IMAGE_VERSION}" \
-        '.Snapshot=$update_date | .Environment={"BASE_IMAGE_ID" : $image_id, "OUTPUT_NAME" : $output_name} | .ImageVersion=$image_version | .ImageId=$ext_img_id | .Output=$output_name' <<< $DATA) > /dev/stdout
+        --arg output_name "${OUTPUT_NAME}" \
+        '.Snapshot=$update_date | .Environment={"BASE_IMAGE_ID" : $image_id, "OUTPUT_NAME" : $output_name}' <<< $DATA) > /dev/stdout
