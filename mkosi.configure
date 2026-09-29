@@ -3,7 +3,7 @@
 # Grab our input data
 DATA=$(jq "." /dev/stdin)
 
-OUTPUT_NAME=$(jq ".Output" <<< $DATA)
+OUTPUT_NAME=$(jq ".Output" <<< $DATA | tr -d '"')
 
 # We must hardcode this location as the image does not exist when building yet
 source mkosi.base/usr/lib/os-release
