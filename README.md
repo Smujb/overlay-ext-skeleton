@@ -19,4 +19,4 @@ Currently, some post-install scripts will fail to run if they are provided by a 
 
 ### Arch Linux
 
-Package metadate for the base image is assumed to be in `/usr/lib/sysimage/lib/pacman`. This is hacky and [can hopefully be addressed by mkosi](https://github.com/systemd/mkosi/discussions/4459). Currently, package db info from the overlay does not persist onto the final image but again this would be fixed if mkosi implements custom db paths.
+Package metadate for the base image is assumed to be in `/usr/lib/sysimage/lib/pacman`. This is hacky and [can hopefully be addressed by mkosi](https://github.com/systemd/mkosi/discussions/4459).
