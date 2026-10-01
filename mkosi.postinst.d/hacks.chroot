@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
 if [[ $DISTRIBUTION = "arch" ]]; then
+  mkdir -p "/usr/lib/sysimage/lib"
   cp "/var/lib/pacman" "/usr/lib/sysimage/lib/pacman"
 fi
