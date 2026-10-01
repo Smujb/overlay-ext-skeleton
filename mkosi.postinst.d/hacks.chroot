@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if [[ $DISTRIBUTION = "arch" ]]; then
+  mv "/var/lib/pacman" "/usr/lib/sysimage/lib/pacman"
+fi
