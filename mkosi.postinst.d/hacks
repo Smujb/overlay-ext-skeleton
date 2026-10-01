@@ -2,5 +2,5 @@
 
 if [[ $DISTRIBUTION = "arch" ]]; then
   mkdir -p "/usr/lib/sysimage/lib"
-  cp "/var/lib/pacman" "/usr/lib/sysimage/lib/pacman"
+  cp -r "$BUILDROOT/var/lib/pacman" "$BUILDROOT/usr/lib/sysimage/lib/pacman"
 fi
